@@ -60,3 +60,13 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-auth")
 }
+
+tasks.register("buildAndRun") {
+    dependsOn("installDebug")
+    doLast {
+        val adb = "${android.sdkDirectory}/platform-tools/adb"
+        exec {
+            commandLine(adb, "shell", "am", "start", "-n", "com.example.smartshop/com.example.smartshop.MainActivity")
+        }
+    }
+}
