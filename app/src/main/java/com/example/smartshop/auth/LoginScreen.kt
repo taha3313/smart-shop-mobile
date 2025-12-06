@@ -17,7 +17,8 @@ import com.google.firebase.ktx.Firebase
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    onLoginSuccess: () -> Unit
+    onLoginSuccess: () -> Unit,
+    onNavigateToSignUp: () -> Unit
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -90,7 +91,7 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(8.dp))
 
         OutlinedButton(
-            onClick = { /* TODO: Handle sign up */ },
+            onClick = { onNavigateToSignUp() },
             modifier = Modifier.fillMaxWidth().height(50.dp)
         ) {
             Text("S'inscrire")
@@ -102,6 +103,6 @@ fun LoginScreen(
 @Composable
 fun PreviewLoginScreen() {
     SmartShopTheme {
-        LoginScreen(onLoginSuccess = {})
+        LoginScreen(onLoginSuccess = {}, onNavigateToSignUp = {})
     }
 }

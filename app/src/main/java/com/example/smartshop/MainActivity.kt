@@ -16,7 +16,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.smartshop.auth.LoginScreen
+import com.example.smartshop.auth.SignUpScreen
 import com.example.smartshop.ui.theme.SmartShopTheme
+
+sealed class Screen {
+    object Login : Screen()
+    object SignUp : Screen()
+    object Home : Screen()
+}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,15 +31,25 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SmartShopTheme {
-                var showLoginScreen by remember { mutableStateOf(true) }
+                var currentScreen by remember { mutableStateOf<Screen>(Screen.Login) }
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    if (showLoginScreen) {
-                        LoginScreen(
-                            onLoginSuccess = { showLoginScreen = false }
-                        )
-                    } else {
-                        HomeScreen(modifier = Modifier.padding(innerPadding))
+                    when (currentScreen) {
+                        is Screen.Login -> {
+                            LoginScreen(
+                                onLoginSuccess = { currentScreen = Screen.Home },
+                                onNavigateToSignUp = { currentScreen = Screen.SignUp }
+                            )
+                        }
+                        is Screen.SignUp -> {
+                            SignUpScreen(
+                                onSignUpSuccess = { currentScreen = Screen.Home },
+                                onNavigateToLogin = { currentScreen = Screen.Login }
+                            )
+                        }
+                        is Screen.Home -> {
+                            HomeScreen(modifier = Modifier.padding(innerPadding))
+                        }
                     }
                 }
             }
