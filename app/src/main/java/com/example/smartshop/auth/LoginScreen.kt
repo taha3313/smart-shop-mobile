@@ -98,9 +98,11 @@ fun LoginScreen(
             Text("S'inscrire")
         }
 
+        Spacer(modifier = Modifier.height(8.dp))
+
         TextButton(
             onClick = { onNavigateToForgotPassword() },
-            modifier = Modifier.fillMaxWidth().height(50.dp)
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text("Mot de passe oublié?")
         }
