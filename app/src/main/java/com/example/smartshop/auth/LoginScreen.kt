@@ -86,6 +86,15 @@ fun LoginScreen(
                 Text("Se connecter")
             }
         }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedButton(
+            onClick = { /* TODO: Handle sign up */ },
+            modifier = Modifier.fillMaxWidth().height(50.dp)
+        ) {
+            Text("S'inscrire")
+        }
     }
 }
 
