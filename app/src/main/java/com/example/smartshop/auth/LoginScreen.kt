@@ -18,7 +18,8 @@ import com.google.firebase.ktx.Firebase
 @Composable
 fun LoginScreen(
     onLoginSuccess: () -> Unit,
-    onNavigateToSignUp: () -> Unit
+    onNavigateToSignUp: () -> Unit,
+    onNavigateToForgotPassword: () -> Unit
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -96,6 +97,13 @@ fun LoginScreen(
         ) {
             Text("S'inscrire")
         }
+
+        TextButton(
+            onClick = { onNavigateToForgotPassword() },
+            modifier = Modifier.fillMaxWidth().height(50.dp)
+        ) {
+            Text("Mot de passe oublié?")
+        }
     }
 }
 
@@ -103,6 +111,10 @@ fun LoginScreen(
 @Composable
 fun PreviewLoginScreen() {
     SmartShopTheme {
-        LoginScreen(onLoginSuccess = {}, onNavigateToSignUp = {})
+        LoginScreen(
+            onLoginSuccess = {},
+            onNavigateToSignUp = {},
+            onNavigateToForgotPassword = {}
+        )
     }
 }

@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.smartshop.auth.ForgotPasswordScreen
 import com.example.smartshop.auth.LoginScreen
 import com.example.smartshop.auth.SignUpScreen
 import com.example.smartshop.ui.theme.SmartShopTheme
@@ -22,6 +23,7 @@ import com.example.smartshop.ui.theme.SmartShopTheme
 sealed class Screen {
     object Login : Screen()
     object SignUp : Screen()
+    object ForgotPassword : Screen()
     object Home : Screen()
 }
 
@@ -38,12 +40,18 @@ class MainActivity : ComponentActivity() {
                         is Screen.Login -> {
                             LoginScreen(
                                 onLoginSuccess = { currentScreen = Screen.Home },
-                                onNavigateToSignUp = { currentScreen = Screen.SignUp }
+                                onNavigateToSignUp = { currentScreen = Screen.SignUp },
+                                onNavigateToForgotPassword = { currentScreen = Screen.ForgotPassword }
                             )
                         }
                         is Screen.SignUp -> {
                             SignUpScreen(
                                 onSignUpSuccess = { currentScreen = Screen.Home },
+                                onNavigateToLogin = { currentScreen = Screen.Login }
+                            )
+                        }
+                        is Screen.ForgotPassword -> {
+                            ForgotPasswordScreen(
                                 onNavigateToLogin = { currentScreen = Screen.Login }
                             )
                         }
