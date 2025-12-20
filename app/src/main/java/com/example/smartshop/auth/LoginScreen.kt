@@ -17,9 +17,9 @@ import com.google.firebase.ktx.Firebase
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    onLoginSuccess: () -> Unit,
-    onNavigateToSignUp: () -> Unit,
-    onNavigateToForgotPassword: () -> Unit
+    onLogin: () -> Unit,
+    onSignUp: () -> Unit,
+    onForgotPassword: () -> Unit
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -72,7 +72,7 @@ fun LoginScreen(
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            onLoginSuccess()
+                            onLogin()
                         } else {
                             errorMessage = "Email ou mot de passe incorrect."
                         }
@@ -92,7 +92,7 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(8.dp))
 
         OutlinedButton(
-            onClick = { onNavigateToSignUp() },
+            onClick = { onSignUp() },
             modifier = Modifier.fillMaxWidth().height(50.dp)
         ) {
             Text("S'inscrire")
@@ -101,7 +101,7 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(8.dp))
 
         TextButton(
-            onClick = { onNavigateToForgotPassword() },
+            onClick = { onForgotPassword() },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Mot de passe oublié?")
@@ -114,9 +114,9 @@ fun LoginScreen(
 fun PreviewLoginScreen() {
     SmartShopTheme {
         LoginScreen(
-            onLoginSuccess = {},
-            onNavigateToSignUp = {},
-            onNavigateToForgotPassword = {}
+            onLogin = {},
+            onSignUp = {},
+            onForgotPassword = {}
         )
     }
 }

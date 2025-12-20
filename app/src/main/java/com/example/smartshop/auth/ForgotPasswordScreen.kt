@@ -16,7 +16,7 @@ import com.google.firebase.ktx.Firebase
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ForgotPasswordScreen(
-    onNavigateToLogin: () -> Unit
+    onLogin: () -> Unit
 ) {
     var email by remember { mutableStateOf("") }
     var message by remember { mutableStateOf<String?>(null) }
@@ -87,7 +87,7 @@ fun ForgotPasswordScreen(
         Spacer(modifier = Modifier.height(8.dp))
 
         TextButton(
-            onClick = { onNavigateToLogin() },
+            onClick = { onLogin() },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Retour à la connexion")
@@ -99,6 +99,6 @@ fun ForgotPasswordScreen(
 @Composable
 fun PreviewForgotPasswordScreen() {
     SmartShopTheme {
-        ForgotPasswordScreen(onNavigateToLogin = {})
+        ForgotPasswordScreen(onLogin = {})
     }
 }

@@ -17,8 +17,8 @@ import com.google.firebase.ktx.Firebase
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpScreen(
-    onSignUpSuccess: () -> Unit,
-    onNavigateToLogin: () -> Unit
+    onSignUp: () -> Unit,
+    onLogin: () -> Unit
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -85,7 +85,7 @@ fun SignUpScreen(
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            onSignUpSuccess()
+                            onSignUp()
                         } else {
                             errorMessage = task.exception?.message ?: "Une erreur s'est produite."
                         }
@@ -105,7 +105,7 @@ fun SignUpScreen(
         Spacer(modifier = Modifier.height(8.dp))
 
         TextButton(
-            onClick = { onNavigateToLogin() },
+            onClick = { onLogin() },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Déjà un compte? Se connecter")
@@ -117,6 +117,6 @@ fun SignUpScreen(
 @Composable
 fun PreviewSignUpScreen() {
     SmartShopTheme {
-        SignUpScreen(onSignUpSuccess = {}, onNavigateToLogin = {})
+        SignUpScreen(onSignUp = {}, onLogin = {})
     }
 }
